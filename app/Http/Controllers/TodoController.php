@@ -78,7 +78,9 @@ class TodoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $todo = Todo::findOrFail($id);
+        $todo->update($request->all());
+        $todo->save();
     }
 
     /**
@@ -89,6 +91,9 @@ class TodoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $todo = Todo::findOrFail($id);
+        $todo->delete();
+        return Todo::latest()->get();
+
     }
 }
